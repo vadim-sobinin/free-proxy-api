@@ -1,0 +1,19 @@
+services:
+  proxy-manager:
+    image: proxy-manager:latest
+    container_name: proxy-manager
+    ports:
+      - '${API_PORT:-8000}:8000'
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8000/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    driver: bridge
