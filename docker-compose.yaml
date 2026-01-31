@@ -1,5 +1,6 @@
 services:
   proxy-manager:
+    build: .
     image: proxy-manager:latest
     container_name: proxy-manager
     ports:
